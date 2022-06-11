@@ -302,8 +302,11 @@ class MainWindow(ttk.Frame):
         folder_export = os.path.abspath(os.path.join(file_folder, filename))
         os.makedirs(folder_export, exist_ok=True)
         # Export all the cuts
+        n = len(list_cuts)
+        progressbar = src.frames.Progressbar(self, "Exporting cuts", 0, n)
         list_files_exported = list()
         for i, (_, start, end, _) in enumerate(list_cuts):
+            progressbar.step()
             filename_export = f"{self.media_filename.split('.')[0]}_{i:02d}.mp4"
             filename_export = f"{filename}_{i:02d}.mp4"
             file_export = os.path.join(folder_export, filename_export)
@@ -321,11 +324,16 @@ class MainWindow(ttk.Frame):
             for file_export in list_files_exported:
                 fid.write(f"file '{file_export}'\n")
         # Concatenate all the cuts
+        progressbar.set(status="Concatenating cuts")
+        progressbar.set_mode("indeterminate")
         cmd = f"ffmpeg -f concat -safe 0 -i {file_list_exports} -vcodec copy -acodec copy -y {output}"
         os.system(cmd)
 
         self.master.configure(cursor="arrow")
         print("Exported all the cuts")
+        progressbar.set_mode("determinate")
+        progressbar.set(n=100, n_max=100)
+        progressbar.wait_ok()
 
     def _on_export_cuts_tags(self) -> None:
         # Check if there is a file
