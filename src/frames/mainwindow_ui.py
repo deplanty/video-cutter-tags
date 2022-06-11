@@ -63,9 +63,9 @@ class MainWindowUI:
         self.button_remove_cut = ttk.Button(self.frame_cuts_buttons, image=Image.remove_16px)
         self.button_remove_cut.pack(side="left", padx=5, pady=5)
         self.button_play_cut = ttk.Button(self.frame_cuts_buttons, image=Image.play_16px)
-        self.button_play_cut.pack(side="left", padx=5, pady=5)
+        # self.button_play_cut.pack(side="left", padx=5, pady=5)
         self.button_play_cut_loop = ttk.Button(self.frame_cuts_buttons, image=Image.loop_on_16px)
-        self.button_play_cut_loop.pack(side="left", padx=5, pady=5)
+        # self.button_play_cut_loop.pack(side="left", padx=5, pady=5)
         self.table_cuts = Table(self.frame_cuts)
         self.table_cuts.pack(fill="both", expand=True, padx=5, pady=5)
         self.frame_export = ttk.Frame(self.frame_cuts)
@@ -77,3 +77,9 @@ class MainWindowUI:
 
         master.grid_columnconfigure(0, weight=1)
         master.grid_rowconfigure(0, weight=1)
+
+    def video_paused(self) -> None:
+        self.button_play.config(image=Image.pause_16px)
+
+    def video_played(self) -> None:
+        self.button_play.config(image=Image.play_16px)

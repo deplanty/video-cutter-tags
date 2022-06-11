@@ -11,6 +11,7 @@ import yaml
 import src.frames
 from src.objects import Image
 import src.preload as pl
+from src.objects import tooltip
 
 from .mainwindow_ui import MainWindowUI
 
@@ -53,11 +54,17 @@ class MainWindow(ttk.Frame):
 
         self.ui.slider.set_state("disabled")
 
+        tooltip.set(self.ui.button_new_start_cut, "Start cut section.")
+        tooltip.set(self.ui.button_new_end_cut, "End cut section.")
+        tooltip.set(self.ui.button_cut, "Cuts all the sections and fuse them into a single video.")
+        tooltip.set(self.ui.button_cut_tags, "Cuts all the sections containing the selected tags and fuse them into a single video.")
+        tooltip.set(self.ui.button_remove_cut, "Remove the selected section.")
+
         # Setup VLC
         self.setup_vlc()
 
         self.ui.table_cuts.set([["Start", "End", "Tags"]], True, widths=[60, 60, 120])
-        self.ui.table_cuts.choice_multiple_values_columns(2, list_choices=["Smash", "Recep"])
+        self.ui.table_cuts.choice_multiple_values_columns(2, list_choices=[])
 
     # Menu
 
@@ -148,9 +155,11 @@ class MainWindow(ttk.Frame):
         # If playing, pause
         if self.vlc_player.is_playing():
             self.media_pause()
+            self.ui.video_paused()
         # If paused, play
         elif self.vlc_player.get_media():
             self.media_play()
+            self.ui.video_played()
 
     def _on_prev_5s(self) -> None:
         current_time = self.vlc_player.get_time()
@@ -423,7 +432,7 @@ class MainWindow(ttk.Frame):
             self.ui.table_cuts.add_row(values=[start, stop, tags])
 
         if "version" in data:
-            self.ui.table_cuts.choice_values_columns(2, data["tags"])
+            self.ui.table_cuts.choice_multiple_values_columns(2, list_choices=data["tags"])
 
     def load_media(self, filename:str) -> None:
         """
