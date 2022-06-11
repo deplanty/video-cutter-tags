@@ -1,0 +1,4 @@
+Pillow==9.0.1
+python-tkdnd==0.2.1
+python-vlc==3.0.16120
+PyYAML==6.0
