@@ -5,4 +5,4 @@ This software allows you to define sections and apply tags to them. These labels
 
 # Requirements
 
-This project is based on [Python VLC](https://pypi.org/project/python-vlc/) and [ffmpeg]([https://](https://www.ffmpeg.org/download.html)).
+This project is based on [Python VLC](https://pypi.org/project/python-vlc/) and [ffmpeg](https://www.ffmpeg.org/download.html).
