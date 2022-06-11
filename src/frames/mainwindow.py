@@ -437,6 +437,7 @@ class MainWindow(ttk.Frame):
         self.ui.table_cuts.clear()
 
         # Set the video
+        self.project_filename = filename
         self.load_media(data["video_filename"])
         # Set the cuts
         for cut in data["cuts"]:
