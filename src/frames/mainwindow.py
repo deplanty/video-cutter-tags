@@ -39,6 +39,7 @@ class MainWindow(ttk.Frame):
         self.ui.menubar_play.entryconfig(1, variable=self.var_play_speed, command=self._on_menu_set_play_speed)
         self.ui.menubar_play.entryconfig(2, variable=self.var_play_speed, command=self._on_menu_set_play_speed)
         self.ui.menubar_play.entryconfig(3, variable=self.var_play_speed, command=self._on_menu_set_play_speed)
+        self.ui.menubar.entryconfig(3, command=self._on_menu_info)
         self.ui.button_play.configure(command=self._on_play)
         self.ui.button_prev_10s.configure(command=self._on_prev_10s)
         self.ui.button_prev_5s.configure(command=self._on_prev_5s)
@@ -123,6 +124,9 @@ class MainWindow(ttk.Frame):
         speed = self.var_play_speed.get()
         if self.media_filename:
             self.vlc_player.set_rate(speed)
+
+    def _on_menu_info(self) -> None:
+        src.frames.ProjectInfo(self, self.media_filename)
 
     # Events
 

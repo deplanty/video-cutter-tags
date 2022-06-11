@@ -18,13 +18,13 @@ class MainWindowUI:
         self.menubar_file.add_separator()
         self.menubar_file.add_command(label="Open video")
         self.menubar.add_cascade(label="File", menu=self.menubar_file)
-
         self.menubar_play = tk.Menu(self.menubar, tearoff=0)
         self.menubar_play.add_radiobutton(label="Speed x0.5", value=0.5)
         self.menubar_play.add_radiobutton(label="Speed x1", value=1.0)
         self.menubar_play.add_radiobutton(label="Speed x2", value=2.0)
         self.menubar_play.add_radiobutton(label="Speed x4", value=4.0)
         self.menubar.add_cascade(label="Play", menu=self.menubar_play)
+        self.menubar.add_command(label="Info")
         self.root.config(menu=self.menubar)
 
         self.frame_main = ttk.Frame(master)
