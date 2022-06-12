@@ -13,19 +13,24 @@ import src.preload as pl
 class Application(tkinterDnD.Tk):
     def __init__(self) -> None:
         super().__init__()
-        pl.root = self
 
         Image.load()
 
         # Load configuration files
         with open("resources/config/config.yaml") as fid:
             config = yaml.full_load(fid)
+
         self.title(config["name"])
         self.minsize(**config["minsize"])
 
         # Load mainframe
         self.frame = src.frames.MainWindow(self)
         self.frame.pack(fill="both", expand=True)
+
+        # Save some parameters in preload
+        # TODO: Load the data in the preload
+        pl.root = self
+        pl.config = config
 
 
 if __name__ == "__main__":

@@ -18,7 +18,7 @@ from .mainwindow_ui import MainWindowUI
 
 class MainWindow(ttk.Frame):
     def __init__(self, master:tk.Widget) -> None:
-        super().__init__()
+        super().__init__(master)
 
         # Variables
         self.project_filename = None
@@ -97,7 +97,10 @@ class MainWindow(ttk.Frame):
         """
         Asks for a filename and saves the current project.
         """
+        file = os.path.basename(self.media_filename)
+        file = os.path.splitext(file)[0]
         filename = tk.filedialog.asksaveasfilename(
+            initialfile=f"{file}.cut",
             filetypes=(("Cuts project", "*.cut"), ("All files", "*.*")),
             defaultextension=".cut"
         )
@@ -454,6 +457,10 @@ class MainWindow(ttk.Frame):
         Args:
             filename (str): path to the media file.
         """
+
+        # Update the title of the window
+        pl.root.title(f"{pl.config['name']} - {os.path.basename(filename)}")
+        # Load the media
         media = self.vlc_instance.media_new(filename)
         self.vlc_player.set_media(media)
         self.vlc_player.set_hwnd(self.ui.frame_player.winfo_id())
