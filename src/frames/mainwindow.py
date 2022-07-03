@@ -318,7 +318,7 @@ class MainWindow(ttk.Frame):
             time_start = self.get_seconds(start)
             time_end = self.get_seconds(end)
             duration = time.strftime("%H:%M:%S", time.gmtime(time_end - time_start))
-            cmd = f"ffmpeg -ss {start} -i {self.media_filename} -t {duration} -vcodec copy -acodec copy -y {file_export}"
+            cmd = f"ffmpeg -ss {start} -i \"{self.media_filename}\" -t {duration} -vcodec copy -acodec copy -y \"{file_export}\""
             os.system(cmd)
         # Create a file with all the cuts
         file_list_exports = os.path.join(folder_export, "list_cuts.txt")
@@ -329,7 +329,7 @@ class MainWindow(ttk.Frame):
         # Concatenate all the cuts
         progressbar.set(status="Concatenating cuts")
         progressbar.set_mode("indeterminate")
-        cmd = f"ffmpeg -f concat -safe 0 -i {file_list_exports} -vcodec copy -acodec copy -y {output}"
+        cmd = f"ffmpeg -f concat -safe 0 -i \"{file_list_exports}\" -vcodec copy -acodec copy -y \"{output}\""
         os.system(cmd)
 
         self.master.configure(cursor="arrow")
@@ -385,7 +385,7 @@ class MainWindow(ttk.Frame):
             time_start = self.get_seconds(start)
             time_end = self.get_seconds(end)
             duration = time.strftime("%H:%M:%S", time.gmtime(time_end - time_start))
-            cmd = f"ffmpeg -ss {start} -i {self.media_filename} -t {duration} -vcodec copy -acodec copy -y {file_export}"
+            cmd = f"ffmpeg -ss {start} -i \"{self.media_filename}\" -t {duration} -vcodec copy -acodec copy -y \"{file_export}\""
             os.system(cmd)
         # Create a file with all the cuts
         file_list_exports = os.path.join(folder_export, "list_cuts.txt")
@@ -394,7 +394,7 @@ class MainWindow(ttk.Frame):
             for file_export in list_files_exported:
                 fid.write(f"file '{file_export}'\n")
         # Concatenate all the cuts
-        cmd = f"ffmpeg -f concat -safe 0 -i {file_list_exports} -vcodec copy -acodec copy -y {output}"
+        cmd = f"ffmpeg -f concat -safe 0 -i \"{file_list_exports}\" -vcodec copy -acodec copy -y \"{output}\""
         os.system(cmd)
 
         self.master.configure(cursor="arrow")
