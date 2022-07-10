@@ -79,7 +79,7 @@ class MainWindowUI:
         master.grid_rowconfigure(0, weight=1)
 
     def video_paused(self) -> None:
-        self.button_play.config(image=Image.pause_16px)
+        self.button_play.config(image=Image.play_16px)
 
     def video_played(self) -> None:
-        self.button_play.config(image=Image.play_16px)
+        self.button_play.config(image=Image.pause_16px)

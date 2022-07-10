@@ -471,6 +471,7 @@ class MainWindow(ttk.Frame):
         self.media_length = self.vlc_player.get_length()
         self.vlc_player.play()
         self.run_loop_update_slider()
+        self.ui.video_played()
 
     def setup_bindings(self) -> None:
         """
