@@ -353,6 +353,7 @@ class MainWindow(ttk.Frame):
         x.wait_window()
         tags_export = x.get()
         if tags_export is None:
+            self.master.configure(cursor="arrow")
             return
 
         tags_str = "-".join([tag for tag in tags_export if tags_export[tag]])

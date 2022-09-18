@@ -16,6 +16,8 @@ class ExportWindow(tk.Toplevel):
         for tag in tags_selected:
             self.ui.set_tag(tag, True)
 
+        self.minsize(250, 200)
+
     # Events
 
     def _on_validate(self) -> None:

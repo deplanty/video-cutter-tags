@@ -23,7 +23,7 @@ class ExportWindowUI:
         var = tk.BooleanVar(self.master, value)
         self.vars_tags[tag] = var
         checkbutton = ttk.Checkbutton(self.frame_tags, text=tag, variable=var)
-        checkbutton.pack()
+        checkbutton.pack(fill="x", padx=5)
 
     def set_tag(self, tag:str, value:bool) -> None:
         self.vars_tags[tag].set(value)
