@@ -103,6 +103,7 @@ class Progressbar(tk.Toplevel):
         self.__update_percent()
         self.__update_progressbar()
         self.__update_btn_ok()
+        self.update()
 
     def set_mode(self, mode:str="determinate"):
         """
@@ -115,7 +116,7 @@ class Progressbar(tk.Toplevel):
         self.mode = mode
         self.bar.configure(mode=mode)
         if mode == "indeterminate":
-            self.bar.start(250)
+            self.bar.start()
 
     def step(self, delta=1, pause=0.01):
         """

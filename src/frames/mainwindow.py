@@ -1,10 +1,9 @@
 import datetime
 import os
-from re import A
 import time
 import tkinter as tk
 import tkinter.filedialog
-from tkinter import N, Y, ttk
+from tkinter import ttk
 import vlc
 import yaml
 
@@ -327,15 +326,14 @@ class MainWindow(ttk.Frame):
             for file_export in list_files_exported:
                 fid.write(f"file '{file_export}'\n")
         # Concatenate all the cuts
-        progressbar.set(status="Concatenating cuts")
-        progressbar.set_mode("indeterminate")
+        progressbar.set(n=0, status="Concatenating cuts")
         cmd = f"ffmpeg -f concat -safe 0 -i \"{file_list_exports}\" -vcodec copy -acodec copy -y \"{output}\""
         os.system(cmd)
 
         self.master.configure(cursor="arrow")
         print("Exported all the cuts")
-        progressbar.set_mode("determinate")
-        progressbar.set(n=100, n_max=100)
+        # progressbar.set_mode("determinate")
+        progressbar.set(n=100, n_max=100, status="Done - Click on OK to close this window")
         progressbar.wait_ok()
 
     def _on_export_cuts_tags(self) -> None:
